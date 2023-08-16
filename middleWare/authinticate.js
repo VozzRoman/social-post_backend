@@ -12,6 +12,9 @@ export const authinticate = async (req, res, next) => {
     const { id } = jwt.verify(token, process.env.SECRET__KEY);
     const user = await UserModel.findById(id);
     req.user = user;
+    if (!user || !user.token || user.token !== token) {
+      next(createError(401, "token false"));
+    }
     next();
   } catch (error) {}
 };

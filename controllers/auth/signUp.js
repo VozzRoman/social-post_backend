@@ -17,7 +17,11 @@ const signUp = asyncHandler(async (req, res) => {
   res.status(201).json({
     code: 201,
     status: "ok",
-    data: { name: user.name, email: user.email },
+    data: {
+      name: user.name,
+      email: user.email,
+      message: "registration was successful",
+    },
   });
 });
 

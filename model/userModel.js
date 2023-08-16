@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, Types } from "mongoose";
 import Joi from "joi";
 
 const emailRegexp = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
@@ -20,6 +20,12 @@ const userSchema = new Schema(
       required: true,
       minlength: 6,
     },
+    posts: [
+      {
+        type: Types.ObjectId,
+        ref: "post",
+      },
+    ],
     token: {
       type: String,
       default: "",
