@@ -26,7 +26,7 @@ const signIn = asyncHandler(async (req, res) => {
   res.status(201).json({
     code: 201,
     status: "ok",
-    data: { name: candidate.name, token: token },
+    data: { name: candidate.name, token: token, email: candidate.email },
   });
 });
 

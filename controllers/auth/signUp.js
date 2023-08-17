@@ -7,7 +7,7 @@ const signUp = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   const candidate = await UserModel.findOne({ email });
   if (candidate) {
-    throw createError(409, "user already exists");
+    throw createError(409, "такий користувач вже існуе");
   }
   const hashPassword = await bcrypt.hash(password, 10);
   const user = await UserModel.create({ ...req.body, password: hashPassword });
