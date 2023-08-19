@@ -3,12 +3,18 @@ import createError from "http-errors";
 import { PostModel } from "../../model/postModel.js";
 
 const getAll = asyncHandler(async (req, res) => {
-  const posts = await PostModel.find({});
+  const posts = await PostModel.find({}).sort("-createdAt");
+  const popularPosts = await PostModel.find({}).limit(5).sort("-vews");
   if (!posts) {
-    throw createError(400, "не можливо створити пост");
+    throw createError(400, "пости відсутні");
   }
 
-  res.json({ code: 200, status: "ok", data: posts });
+  res.json({
+    code: 200,
+    status: "ok",
+    posts,
+    popularPosts,
+  });
 });
 
 export default getAll;
