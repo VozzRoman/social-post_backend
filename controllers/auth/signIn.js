@@ -7,12 +7,13 @@ import { UserModel } from "../../model/userModel.js";
 const signIn = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   const candidate = await UserModel.findOne({ email });
+  console.log("CANDIADAT", candidate);
   if (!candidate) {
-    throw createError(409, "email or password is invalid");
+    throw createError(409, "пароль обо email не вірний");
   }
   const comparePassword = bcrypt.compare(password, candidate.password);
   if (!comparePassword) {
-    throw createError(409, "email or password is invalid");
+    throw createError(409, "пароль обо email не вірний");
   }
   const payload = {
     id: candidate._id,
@@ -27,6 +28,7 @@ const signIn = asyncHandler(async (req, res) => {
     code: 201,
     status: "ok",
     data: {
+      avatar: candidate.avatar,
       name: candidate.name,
       token: token,
       email: candidate.email,

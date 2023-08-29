@@ -16,5 +16,7 @@ export const authinticate = async (req, res, next) => {
       next(createError(401, "token false"));
     }
     next();
-  } catch (error) {}
+  } catch (error) {
+	  console.log(error);
+  }
 };

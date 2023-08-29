@@ -1,23 +1,40 @@
 import { UserModel } from "../../model/userModel.js";
 import { PostModel } from "../../model/postModel.js";
+import { v4 } from "uuid";
+import createError from "http-errors";
 import asyncHandler from "express-async-handler";
 import path, { dirname } from "path";
-import { fileURLToPath } from "url";
-
+// import { fileURLToPath } from "url";
+import cloudinary from "../../cloudinary/cloudinary.js";
+import fs from "fs/promises";
+import { checkType } from "../../middleWare/checkType.js";
 const addPost = asyncHandler(async (req, res) => {
   const { title, text } = req.body;
   const user = await UserModel.findById(req.user._id);
+  console.log("USER", user.avatar);
   if (req.files) {
-    let fileName = Date.now().toString() + req.files.imgUrl.name; //формеруем імя картінкі которая пріходіт с фронтенда
-    const _dirname = dirname(fileURLToPath(import.meta.url)); //папка в которой ми находімся (controllers/post)
-    req.files.imgUrl.mv(path.join(_dirname, "..", "..", "uploads", fileName)); //переносім файл в папку uploads
+    const type = req.files.imgUrl.mimetype;
+    checkType(type); //фільтр на тип файлу
+
+    let fileName = v4() + req.files.imgUrl.name; //формеруем імя картінкі которая пріходіт с фронтенда
+    const filePath = path.resolve("uploads", fileName); //папка в которой ми находімся (controllers/post)
+    req.files.imgUrl.mv(filePath);
+    console.log("local", filePath);
+    const newPath = await cloudinary.uploader.upload(filePath, {
+      folder: "imaginarium",
+    });
+    console.log("CloudyPath", newPath.secure_url);
+    fs.unlink(filePath);
+
     const postWithImage = await PostModel.create({
       username: user.name,
+      avatar: user.avatar,
       title,
       text,
-      imgUrl: fileName,
+      imgUrl: newPath.secure_url,
       author: req.user._id,
     });
+    console.log(postWithImage);
     //пушім в модель Юзера
     await UserModel.findByIdAndUpdate(req.user._id, {
       $push: { posts: postWithImage },
@@ -28,6 +45,7 @@ const addPost = asyncHandler(async (req, res) => {
   }
   const postNoImage = await PostModel.create({
     username: user.name,
+    avatar: user.avatar,
     title,
     text,
     imgUrl: "",
