@@ -14,7 +14,7 @@ router.get("/", ctrlGetAll);
 router.post("/", authinticate, ctrlCreate);
 router.get("/:id", ctrlGetById);
 router.delete("/:id", authinticate, ctrlDelete);
-router.put("/:id", ctrlUpdate);
+router.put("/:id", authinticate, ctrlUpdate);
 
 router.get("/user/my", authinticate, ctrlGetUserPost);
 router.patch("/:id/like", authinticate, ctrlUpdatePostLikes);
