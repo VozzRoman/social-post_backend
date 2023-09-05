@@ -5,7 +5,7 @@ const postSchema = new Schema(
     username: { type: String },
     avatar: { type: String },
     title: { type: String, required: true },
-    text: { type: String, required: true },
+    text: { type: String, default: "" },
     imgUrl: { type: String, default: "" },
     views: { type: Number, default: 0 },
 

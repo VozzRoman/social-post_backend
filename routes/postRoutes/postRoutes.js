@@ -10,7 +10,7 @@ import ctrlUpdateDislIkes from "../../controllers/post/updatePosDislike.js";
 import { authinticate } from "../../middleWare/authinticate.js";
 const router = express.Router();
 
-router.get("/", ctrlGetAll);
+router.get("/", authinticate, ctrlGetAll);
 router.post("/", authinticate, ctrlCreate);
 router.get("/:id", ctrlGetById);
 router.delete("/:id", authinticate, ctrlDelete);
