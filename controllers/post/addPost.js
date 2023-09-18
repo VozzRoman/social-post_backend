@@ -18,10 +18,18 @@ const addPost = asyncHandler(async (req, res) => {
 
     let fileName = v4() + req.files.imgUrl.name; //формеруем імя картінкі которая пріходіт с фронтенда
     const filePath = path.resolve("uploads", fileName); //папка в которой ми находімся (controllers/post)
+
     req.files.imgUrl.mv(filePath);
     console.log("local", filePath);
     const newPath = await cloudinary.uploader.upload(filePath, {
       folder: "imaginarium",
+      transformation: {
+        width: 1200,
+
+        crop: "scale",
+        quality: "auto",
+        fetch_format: "webp",
+      },
     });
     console.log("CloudyPath", newPath.secure_url);
     fs.unlink(filePath);

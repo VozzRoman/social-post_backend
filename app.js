@@ -28,10 +28,10 @@ app.use("/api/comment", commentRouter);
 app.use("/api/users", usersRouter);
 
 app.use((req, res) => {
-  res.status(404).json({ message: "Page not found" });
+  res.status(404).json({ message: "не вірний маршрут" });
 });
 app.use((err, req, res, next) => {
-  const { status = 500, message = "Server error" } = err;
+  const { status = 500, message = "спробуй ще раз" } = err;
   res.status(status).json({ message });
 });
 

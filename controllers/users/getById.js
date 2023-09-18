@@ -4,12 +4,12 @@ import { UserModel } from "../../model/userModel.js";
 import { isValidObjectId } from "mongoose";
 const getById = asyncHandler(async (req, res) => {
   const { id } = req.params;
-  console.log("ID-->", id);
+  //   console.log("ID-->", id);
   if (!isValidObjectId(id)) {
     throw createError(400, "id is not valid");
   }
   const user = await UserModel.findById(id);
-  console.log("GetByIs", user);
+  //   console.log("GetByIs", user);
   if (!user) {
     throw createError(401, "unable to find post");
   }

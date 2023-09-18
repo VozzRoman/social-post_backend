@@ -2,9 +2,9 @@ import asyncHandler from "express-async-handler";
 import createError from "http-errors";
 import { UserModel } from "../../model/userModel.js";
 const getAll = asyncHandler(async (req, res) => {
-  console.log("getALl");
+  //   console.log("getALl");
   const users = await UserModel.find({});
-  console.log("USERS-->", users);
+  //   console.log("USERS-->", users);
   if (!users) {
     throw createError(401, "unable to get users");
   }

@@ -7,7 +7,7 @@ import { UserModel } from "../../model/userModel.js";
 const signIn = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   const candidate = await UserModel.findOne({ email });
-  console.log("CANDIADAT", candidate);
+  //   console.log("CANDIADAT", candidate);
   if (!candidate) {
     throw createError(409, "пароль обо email не вірний");
   }
@@ -33,6 +33,7 @@ const signIn = asyncHandler(async (req, res) => {
       token: token,
       email: candidate.email,
       _id: candidate._id,
+      posts: candidate.posts,
     },
   });
 });

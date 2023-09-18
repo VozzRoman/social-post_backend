@@ -57,7 +57,7 @@ export const signUpSchema = Joi.object({
     //  .error(new Error("пароль мае бути не меньше 9 символів")),
     .messages({
       "string.empty": `введіть будьласка пароль`,
-      "string.min": `пароль має містити не менше 9 символів`,
+      "string.min": `пароль має містити не меньше 9 символів`,
     }),
 });
 export const signInSchema = Joi.object({
@@ -67,7 +67,7 @@ export const signInSchema = Joi.object({
   }),
   password: Joi.string().min(9).required().messages({
     "string.empty": `введіть будьласка пароль`,
-    "string.min": `пароль має містити не менше 9 символів`,
+    "string.min": `пароль має містити не меньше 9 символів`,
   }),
 });
 

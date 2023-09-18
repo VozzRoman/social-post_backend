@@ -26,8 +26,15 @@ const signUp = asyncHandler(async (req, res) => {
     req.files.avatar.mv(filePath);
     const newPath = await cloudinary.uploader.upload(filePath, {
       folder: "avatars",
+      transformation: {
+        width: 180,
+        height: 180,
+        crop: "fill",
+        fetch_format: "webp",
+      },
     });
     console.log("NewPath", newPath);
+
     fs.unlink(filePath);
     const user = await UserModel.create({
       ...req.body,

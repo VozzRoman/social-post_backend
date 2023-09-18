@@ -22,14 +22,12 @@ const getUserPostById = asyncHandler(async (req, res) => {
     throw createError(401, "unable to find posts");
   }
 
-  res
-    .status(200)
-    .json({
-      code: 200,
-      message: "ok",
-      data: { name: user.name, avatar: user.avatar, email: user.email },
-      listPost,
-    });
+  res.status(200).json({
+    code: 200,
+    message: "ok",
+    data: { name: user.name, avatar: user.avatar, email: user.email },
+    listPost,
+  });
 });
 
 export default getUserPostById;

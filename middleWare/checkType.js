@@ -6,4 +6,5 @@ export const checkType = (reqFile) => {
   ) {
     return;
   }
+  return;
 };

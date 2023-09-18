@@ -6,7 +6,7 @@ import ctrlDelete from "../../controllers/post/remove.js";
 import ctrlUpdate from "../../controllers/post/update.js";
 import ctrlGetUserPost from "../../controllers/post/getUserPosts.js";
 import ctrlUpdatePostLikes from "../../controllers/post/updatePostLikes.js";
-import ctrlUpdateDislIkes from "../../controllers/post/updatePosDislike.js";
+import ctrlUpdateViews from "../../controllers/post/updatePosDislike.js";
 import { authinticate } from "../../middleWare/authinticate.js";
 const router = express.Router();
 
@@ -18,5 +18,5 @@ router.put("/:id", authinticate, ctrlUpdate);
 
 router.get("/user/my", authinticate, ctrlGetUserPost);
 router.patch("/:id/like", authinticate, ctrlUpdatePostLikes);
-router.patch("/:id/dislike", authinticate, ctrlUpdateDislIkes);
+router.patch("/:id/view", authinticate, ctrlUpdateViews);
 export default router;
