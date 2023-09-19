@@ -8,7 +8,7 @@ import authRoute from "./routes/authRoutes/authRoute.js";
 import postRoute from "./routes/postRoutes/postRoutes.js";
 import commentRouter from "./routes/commentRouter/commentRouter.js";
 import usersRouter from "./routes/usersRoute/usersRouter.js";
-import connectionDB from "./connectdB.js";
+import connectiondb from "./connectDb.js";
 import fileUpload from "express-fileupload";
 
 dotenv.config();
@@ -35,6 +35,6 @@ app.use((err, req, res, next) => {
   res.status(status).json({ message });
 });
 
-connectionDB();
+connectiondb();
 
 app.listen(3030, () => console.log("server is runing"));
