@@ -8,13 +8,12 @@ import authRoute from "./routes/authRoutes/authRoute.js";
 import postRoute from "./routes/postRoutes/postRoutes.js";
 import commentRouter from "./routes/commentRouter/commentRouter.js";
 import usersRouter from "./routes/usersRoute/usersRouter.js";
-import connectiondb from "./connectDb.js";
+import connectiondb from "./mongo/connectDb.js";
 import fileUpload from "express-fileupload";
 
 dotenv.config();
 
 const app = express();
-
 
 const logger = process.env === "development" ? "dev" : "short";
 app.use(morgan(logger));
