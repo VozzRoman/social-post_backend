@@ -8,7 +8,7 @@ import authRoute from "./routes/authRoutes/authRoute.js";
 import postRoute from "./routes/postRoutes/postRoutes.js";
 import commentRouter from "./routes/commentRouter/commentRouter.js";
 import usersRouter from "./routes/usersRoute/usersRouter.js";
-import connectionDB from "./connectDb.js";
+import connectionDB from "./connectdB.js";
 import fileUpload from "express-fileupload";
 
 dotenv.config();
