@@ -4,7 +4,7 @@ import { PostModel } from "../../model/postModel.js";
 
 const getAll = asyncHandler(async (req, res) => {
   const posts = await PostModel.find({}).sort("-createdAt");
-  const popularPosts = await PostModel.find({}).limit(12);
+  const popularPosts = await PostModel.find({}).limit(12).sort("-views");
   if (!posts) {
     throw createError(400, "пости відсутні");
   }
