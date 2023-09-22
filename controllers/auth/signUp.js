@@ -29,7 +29,7 @@ const signUp = asyncHandler(async (req, res) => {
       transformation: {
         width: 180,
         height: 180,
-        crop: "fill",
+        crop: "crop",
         fetch_format: "webp",
       },
     });
