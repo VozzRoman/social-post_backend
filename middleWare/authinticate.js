@@ -17,6 +17,7 @@ export const authinticate = async (req, res, next) => {
     }
     next();
   } catch (error) {
-	  console.log(error);
+    //----
+    next(createError(401, "не зареестрований"));
   }
 };
