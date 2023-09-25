@@ -26,12 +26,12 @@ const signUp = asyncHandler(async (req, res) => {
     req.files.avatar.mv(filePath);
     const newPath = await cloudinary.uploader.upload(filePath, {
       folder: "avatars",
-      transformation: {
-        width: 180,
-        height: 180,
-        crop: "crop",
-        fetch_format: "webp",
-      },
+      // transformation: {
+      //   width: 180,
+      //   height: 180,
+      //   crop: "crop",
+      //   fetch_format: "auto",
+      // },
     });
     console.log("NewPath", newPath);
 
